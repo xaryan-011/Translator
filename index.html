@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be the Banker - Deadlock Prevention Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <div class="start-content">
+                <h1 class="game-title">Be the Banker</h1>
+                <p class="game-subtitle">Master the Banker's Algorithm and prevent deadlocks!</p>
+                
+                <div class="level-selection">
+                    <h3>Choose Difficulty Level</h3>
+                    <div class="level-buttons">
+                        <button class="btn btn--primary level-btn" data-level="1">
+                            <div class="level-info">
+                                <strong>Level 1</strong>
+                                <span>2 Processes • Beginner</span>
+                            </div>
+                        </button>
+                        <button class="btn btn--primary level-btn" data-level="2">
+                            <div class="level-info">
+                                <strong>Level 2</strong>
+                                <span>4 Processes • Intermediate</span>
+                            </div>
+                        </button>
+                        <button class="btn btn--primary level-btn" data-level="3">
+                            <div class="level-info">
+                                <strong>Level 3</strong>
+                                <span>Random • Advanced</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tutorial-info">
+                    <h4>How to Play:</h4>
+                    <ul>
+                        <li>Select processes to allocate resources</li>
+                        <li>Ensure system remains in safe state</li>
+                        <li>Complete all processes before time runs out</li>
+                        <li>Earn points for successful executions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <div class="game-info">
+                    <div class="level-display">Level <span id="current-level">1</span></div>
+                    <div class="score-display">Score: <span id="current-score">0</span></div>
+                    <div id="timer-display" class="timer-display">Time: <span id="timer-value">60</span>s</div>
+                </div>
+                
+                <div class="safety-status">
+                    <div id="safety-badge" class="safety-badge safe">
+                        <span class="safety-icon">✅</span>
+                        <span class="safety-text">System Safe</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-content">
+                <div class="matrices-section">
+                    <div class="matrix-container">
+                        <h3>Max Matrix</h3>
+                        <div id="max-matrix" class="matrix"></div>
+                    </div>
+                    
+                    <div class="matrix-container">
+                        <h3>Allocation Matrix</h3>
+                        <div id="allocation-matrix" class="matrix"></div>
+                    </div>
+                    
+                    <div class="matrix-container">
+                        <h3>Need Matrix</h3>
+                        <div id="need-matrix" class="matrix"></div>
+                    </div>
+                    
+                    <div class="matrix-container">
+                        <h3>Available Resources</h3>
+                        <div id="available-vector" class="vector"></div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <div class="process-controls">
+                        <h3>Process Selection</h3>
+                        <div id="process-buttons" class="process-buttons"></div>
+                        <button id="execute-btn" class="btn btn--primary btn--lg" disabled>
+                            Execute Selected Process
+                        </button>
+                    </div>
+
+                    <div class="game-status">
+                        <div id="safe-sequence" class="safe-sequence hidden">
+                            <h4>Safe Sequence:</h4>
+                            <div id="sequence-display"></div>
+                        </div>
+                        
+                        <div id="message-display" class="message-display"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="pause-btn" class="btn btn--secondary">Pause Game</button>
+        </div>
+
+        <!-- Level Complete Screen -->
+        <div id="level-complete-screen" class="screen hidden">
+            <div class="complete-content">
+                <h2 class="complete-title">Level Complete!</h2>
+                <div class="score-summary">
+                    <div class="score-item">
+                        <span class="score-label">Execution Points:</span>
+                        <span id="execution-points">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Time Bonus:</span>
+                        <span id="time-bonus">0</span>
+                    </div>
+                    <div class="score-item total">
+                        <span class="score-label">Total Score:</span>
+                        <span id="final-score">0</span>
+                    </div>
+                </div>
+                
+                <div class="complete-actions">
+                    <button id="next-level-btn" class="btn btn--primary btn--lg">Next Level</button>
+                    <button id="restart-btn" class="btn btn--secondary">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="screen hidden">
+            <div class="game-over-content">
+                <h2 class="game-over-title">Game Over</h2>
+                <p class="game-over-message">Time ran out or system became unsafe!</p>
+                <div class="final-score-display">
+                    <span>Final Score: <span id="game-over-score">0</span></span>
+                </div>
+                <div class="game-over-actions">
+                    <button id="try-again-btn" class="btn btn--primary btn--lg">Try Again</button>
+                    <button id="main-menu-btn" class="btn btn--secondary">Main Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pause Screen -->
+        <div id="pause-screen" class="screen hidden">
+            <div class="pause-content">
+                <h2>Game Paused</h2>
+                <div class="pause-actions">
+                    <button id="resume-btn" class="btn btn--primary btn--lg">Resume Game</button>
+                    <button id="quit-btn" class="btn btn--secondary">Quit to Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
