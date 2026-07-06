@@ -4,7 +4,7 @@ const gameData = {
     level1: { 
       processes: 2,
       resources: 3,
-      max: [[7,5,3], [3,2,2]],
+      max: [[7,5,3], [3,2,2]], 
       allocation: [[0,1,0], [2,0,0]],
       available: [3,3,2],
       description: "Basic scenario with 2 processes and 3 resource types"
