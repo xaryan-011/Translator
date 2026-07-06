@@ -1,7 +1,7 @@
 // Game Data
 const gameData = {
   scenarios: {
-    level1: {
+    level1: { 
       processes: 2,
       resources: 3,
       max: [[7,5,3], [3,2,2]],
